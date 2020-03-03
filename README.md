@@ -32,7 +32,7 @@ Second arg is optional, it is also an int defines the length of the returned mon
 fc5.week_lookup(date)
 
 First arg is mandatory and it is an int value of the iso week of the calendar year, it will return the week
-of the month based on the 445 financial calendar, i.e. fc5.weekLookup(9) return Wk1
+of the month based on the 445 financial calendar, i.e. fc5.week_lookup(9) return Wk1
 
 
 ## Authors
