@@ -18,3 +18,5 @@ License
 Free to all
 
 Acknowledgments
+
+Thanks to Divakar for the select_rows code snippet from Stack overflow
