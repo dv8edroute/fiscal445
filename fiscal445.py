@@ -34,7 +34,7 @@ def month_lookup(date, length=None) -> int:
     '''Used to determine which month it is based on the 445 fiscal year
     taking a int value of week of year.
     
-    Usage: monthLookup(int value of a week of the year, optional length in int of desired month string length)
+    Usage: month_lookup(int value of a week of the year, optional length in int of desired month string length)
     Returns a string of month name based on the 445 fiscal calendar'''
     if date == int(date):
         date = str(date)
@@ -46,7 +46,7 @@ def month_lookup(date, length=None) -> int:
 def week_lookup(date) -> int:
     '''Used to determin which 445 fiscal week it is from a standard calendar week
     
-    Usage: weekLookup(int value of a week of the year)
+    Usage: week_lookup(int value of a week of the year)
     Returns a string value intdicating the 445 fiscal week ie. Wk1'''
     if date == int(date):
         date = str(date)
