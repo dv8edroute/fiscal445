@@ -1,10 +1,12 @@
-
+# Author: Dv8edRoute
+# Email: dv8edroute@protonmail.com
+# Version 1.0
+# License: MIT
 
 import pandas as pd
 import numpy as np
 import datetime
 
-# Version 1
 
 # Create 445 year fiscal dataset
 
