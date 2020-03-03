@@ -1,6 +1,6 @@
 # Author: Dv8edRoute
 # Email: dv8edroute@protonmail.com
-# Version 1.0
+# Version 1.1
 # License: MIT
 
 import pandas as pd
@@ -22,7 +22,7 @@ data = {'January':['1', '2', '3', '4','x'], 'February':['5', '6','7','8','x'], '
 
 fiscal445df = pd.DataFrame(data, index =['Wk1', 'Wk2', 'Wk3', 'Wk4', 'Wk5'])
 
-
+#if '__name__' == '__main__':
     
 def select_rows(fiscal445df,search_strings):
     '''Part of the module. No user value'''
@@ -30,7 +30,7 @@ def select_rows(fiscal445df,search_strings):
     unqIDs = np.searchsorted(unq,search_strings)
     return fiscal445df[((IDs.reshape(fiscal445df.shape) == unqIDs[:,None,None]).any(-1)).all(0)]
 
-def monthLookup(date, length=None) -> int:
+def month_lookup(date, length=None) -> int:
     '''Used to determine which month it is based on the 445 fiscal year
     taking a int value of week of year.
     
@@ -43,7 +43,7 @@ def monthLookup(date, length=None) -> int:
             if value==date: #check if column value equals input value 
                 return cols[:length] # return the column name
             
-def weekLookup(date) -> int:
+def week_lookup(date) -> int:
     '''Used to determin which 445 fiscal week it is from a standard calendar week
     
     Usage: weekLookup(int value of a week of the year)
@@ -54,7 +54,7 @@ def weekLookup(date) -> int:
     rows = ''.join(rows)
     return rows
 
-def weekCurrent():
+def week_current():
     '''A variable that returns the current week of the year in int format'''
     return datetime.datetime.now().isocalendar()[1]
 

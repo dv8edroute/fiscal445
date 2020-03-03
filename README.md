@@ -19,17 +19,17 @@ Not uploaded to pypi yet, local use only
 ## Usage
 import fiscal445 as fc5
 
-fc5.weekCurrent()
+fc5.week_current()
 
 This will return the current iso week of the year in int format
 
-fc5.monthLookup(date, *length=None*)
+fc5.month_lookup(date, *length=None*)
 
 First arg is mandatory and it is an int value of the iso week of the calendar year and returns the current month based
 on the 445 financial calendar
 Second arg is optional, it is also an int defines the length of the returned month name, i.e. 3 = Jan, 5 = Janur and so on
 
-fc5.weekLookup(date)
+fc5.week_lookup(date)
 
 First arg is mandatory and it is an int value of the iso week of the calendar year, it will return the week
 of the month based on the 445 financial calendar, i.e. fc5.weekLookup(9) return Wk1
