@@ -1,6 +1,6 @@
 # Author: Dv8edRoute
 # Email: dv8edroute@protonmail.com
-# Version 1.1
+# Version 1.0.1
 # License: MIT
 
 import pandas as pd
@@ -43,7 +43,7 @@ def month_lookup(date, length=None) -> int:
                 return cols[:length] # return the column name
             
 def week_lookup(date) -> int:
-    '''Used to determin which 445 fiscal week it is from a standard calendar week
+    '''Used to determine which 445 fiscal week it is from a standard calendar week
     
     Usage: week_lookup(int value of a week of the year)
     Returns a string value of the 445 fiscal week of that month ie. Wk1'''
