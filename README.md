@@ -9,7 +9,7 @@ This script was developed to simplify the determination of where in the 445 fina
 Built and tested using
 
 python 3.6+, 
-pandas 1.13.0, 
+pandas 0.25.3+, 
 numpy 1.18.0, 
 datetime, 
 

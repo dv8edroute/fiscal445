@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="fiscal445", 
-    version="1.0.1",
+    version="1.0.2",
     author="Dv8edRoute",
     author_email="dv8edroute@protonmail.com",
     description="Returns 445 Fiscal calendar week and month ",
@@ -20,7 +20,7 @@ setuptools.setup(
     ],
     python_requires='>=3.6',
     install_requires=[
-       "pandas >= 1.0.0",
+       "pandas >= 0.25.3",
        "numpy"
    ],
 )
