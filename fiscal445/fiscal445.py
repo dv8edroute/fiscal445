@@ -22,8 +22,7 @@ data = {'January':['1', '2', '3', '4','x'], 'February':['5', '6','7','8','x'], '
 
 fiscal445df = pd.DataFrame(data, index =['Wk1', 'Wk2', 'Wk3', 'Wk4', 'Wk5'])
 
-#if '__name__' == '__main__':
-    
+
 def select_rows(fiscal445df,search_strings):
     '''Part of the module. No user value'''
     unq,IDs = np.unique(fiscal445df,return_inverse=True)
@@ -47,7 +46,7 @@ def week_lookup(date) -> int:
     '''Used to determin which 445 fiscal week it is from a standard calendar week
     
     Usage: week_lookup(int value of a week of the year)
-    Returns a string value intdicating the 445 fiscal week ie. Wk1'''
+    Returns a string value of the 445 fiscal week of that month ie. Wk1'''
     if date == int(date):
         date = str(date)
     rows = select_rows(fiscal445df,[date]).index.tolist() 

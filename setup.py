@@ -5,10 +5,10 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="fiscal445-dv8edroute", # Replace with your own username
-    version="1.0.2",
+    version="1.0.6",
     author="Dv8edRoute",
     author_email="dv8edroute@protonmail.com",
-    description="Returns 445 Fiscal calendar weeks and months ",
+    description="Returns 445 Fiscal calendar week and month ",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/dv8edroute/fiscal445/",
@@ -19,4 +19,9 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     python_requires='>=3.6',
+    install_requires=[
+       "pandas >= 1.0.0",
+       "numpy"
+   ],
 )
+
