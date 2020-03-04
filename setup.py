@@ -8,6 +8,7 @@ setuptools.setup(
     version="1.0.3",
     author="Dv8edRoute",
     author_email="dv8edroute@protonmail.com",
+    license="MIT",
     description="Returns 445 Fiscal calendar week and month ",
     long_description=long_description,
     long_description_content_type="text/markdown",
