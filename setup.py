@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="fiscal445-dv8edroute", # Replace with your own username
+    name="fiscal445", # Replace with your own username
     version="1.0.1",
     author="Dv8edRoute",
     author_email="dv8edroute@protonmail.com",
