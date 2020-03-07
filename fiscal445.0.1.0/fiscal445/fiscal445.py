@@ -133,5 +133,53 @@ def year_to_date_completed():
     return str(beginning),str(end)
 
 
+def quarter_completed(q):
+    if q == 1:
+        beginning = cal.loc[0,'week_ending']
+        beginning = beginning.strftime("%Y-%m-%d")
+        end = cal.loc[13,'week_ending']
+        end = end.strftime("%Y-%m-%d")
+    if q == 2:
+        beginning = cal.loc[13,'week_ending']  + timedelta(days=1)
+        beginning = beginning.strftime("%Y-%m-%d")
+        end = cal.loc[26,'week_ending']
+        end = end.strftime("%Y-%m-%d")
+    if q == 3:
+        beginning = cal.loc[26,'week_ending']  + timedelta(days=1)
+        beginning = beginning.strftime("%Y-%m-%d")
+        end = cal.loc[39,'week_ending']
+        end = end.strftime("%Y-%m-%d")
+    if q == 4:
+        beginning = cal.loc[39,'week_ending']  + timedelta(days=1)
+        beginning = beginning.strftime("%Y-%m-%d")
+        end = cal.loc[52,'week_ending']
+        end = end.strftime("%Y-%m-%d")
+    
+    return str(beginning),str(end)
+
+def quarter_to_date(q):
+    if q == 1:
+        beginning = cal.loc[0,'week_ending']
+        beginning = beginning.strftime("%Y-%m-%d")
+        end = current 
+    if q == 2:
+        beginning = cal.loc[13,'week_ending']  + timedelta(days=1)
+        beginning = beginning.strftime("%Y-%m-%d")
+        end = current 
+    if q == 3:
+        beginning = cal.loc[26,'week_ending']  + timedelta(days=1)
+        beginning = beginning.strftime("%Y-%m-%d")
+        end = current 
+    if q == 4:
+        beginning = cal.loc[39,'week_ending']  + timedelta(days=1)
+        beginning = beginning.strftime("%Y-%m-%d")
+        end = current 
+    if np.datetime64(end) < np.datetime64(beginning):
+        return 'Quarter available yet!'
+    
+    return str(beginning),str(end)
+
+
+
 # cal = set_445_cal('2020-02-02','sat')
 # cal.to_excel('test/test_df.xlsx', header=True, index=False)

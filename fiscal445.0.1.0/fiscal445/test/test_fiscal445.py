@@ -35,6 +35,26 @@ class TestFiscal445(unittest.TestCase):
     def test_year_to_date_completed(self):
         self.assertEqual(fc5.year_to_date_completed(),('2020-02-02', '2020-02-29'))
 
+    def test_quarter_completed(self):
+        self.assertEqual(fc5.quarter_completed(1), ('2020-02-02', '2020-05-02'))
+        self.assertEqual(fc5.quarter_completed(2), ('2020-05-03', '2020-08-01'))
+        self.assertEqual(fc5.quarter_completed(3), ('2020-08-02', '2020-10-31'))
+        self.assertEqual(fc5.quarter_completed(4), ('2020-11-01', '2021-01-30'))
+        
+    def test_quarter_completed_2(self):
+        fc5.current = '2020-03-07'
+        self.assertEqual(fc5.quarter_to_date(1), ('2020-02-02', '2020-03-07'))
+        fc5.current = '2020-06-07'
+        self.assertEqual(fc5.quarter_to_date(2), ('2020-05-03', '2020-06-07'))
+        fc5.current = '2020-10-21'
+        self.assertEqual(fc5.quarter_to_date(3), ('2020-08-02', '2020-10-21'))
+        fc5.current = '2021-01-18'
+        self.assertEqual(fc5.quarter_to_date(4), ('2020-11-01', '2021-01-18'))
+        fc5.current = '2020-03-07'
+    
+    def test_quarter_completed(self):
+        self.assertEqual(fc5.quarter_to_date(2), 'Quarter available yet!')   
+        
 
 if __name__ == '__main__':
     unittest.main()

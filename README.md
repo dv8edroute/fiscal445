@@ -79,7 +79,7 @@ Returns as a tuple the start and end date for month to date reports
 <br>
 
 
-Start and end for month to date most recent week completed or (closed)
+Start and end for month to date most recent week completed
 
 
 ```python
@@ -109,7 +109,7 @@ returns as a tuple
 
 <br>
 
-Start and end for year to date most recent week completed (closed)
+Start and end for year to date most recent week completed
 
 
 ```python
@@ -119,6 +119,44 @@ fc5.year_to_date_completed()
 returns as a tuple 
 
 `('2020-02-02', '2020-02-29')`
+
+<br>
+
+Start and end for completed quarters.
+
+1 for Q1, 2 for Q2, 3 for Q3, 4 for Q4
+
+arg is int value for quater above. `fc5.quarter_completed(arg)`
+
+
+```python
+fc5.quarter_completed(1)
+```
+
+returns as a tuple 
+
+`('2020-02-02', '2020-05-02')`
+
+<br>
+
+Start and end for quarter to date.
+
+1 for Q1, 2 for Q2, 3 for Q3, 4 for Q4
+
+arg is int value for quater above. `fc5.quarter_to_date(arg)`
+
+
+```python
+fc5.quarter_to_date(1)
+```
+
+returns as a tuple 
+
+`('2020-02-02', '2020-03-07')`
+
+returns the following if the current date is before the requested quarter 
+
+`'Quarter not available!'`
 
 <br>
 
