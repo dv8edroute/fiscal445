@@ -78,7 +78,7 @@ def set_445_cal(begin_year,week_ending):
         line_item = [item[x] for item in newlist]
         temp =pd.DataFrame([line_item],columns=["week_ending", "fiscal_week", "fiscal_month"])
         df = df.append(temp, ignore_index=True)
-    df.index.name = 'week_num'
+
     return df
 
 
@@ -133,4 +133,5 @@ def year_to_date_completed():
     return str(beginning),str(end)
 
 
-#cal = set_445_cal('2020-01-01','fri')
+# cal = set_445_cal('2020-02-02','sat')
+# cal.to_excel('test/test_df.xlsx', header=True, index=False)

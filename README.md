@@ -72,7 +72,7 @@ Start and end for month to date
 ```python
 fc5.month_to_date()
 ```
-Returns as a list the start and end date for month to date reports
+Returns as a tuple the start and end date for month to date reports
 
 `('2020-03-01', '2020-03-09')`
 
@@ -86,7 +86,7 @@ Start and end for month to date most recent week completed or (closed)
 fc5.month_to_date_completed()
 ```
 
-returns as a list the start and end date for month to date reports for up to the most completed week
+returns as a tuple the start and end date for month to date reports for up to the most completed week
 
 `('2020-03-01', '2020-03-08')`
 
@@ -103,7 +103,7 @@ Start and end for year to date
 fc5.year_to_date()
 ```
 
-returns as a list 
+returns as a tuple 
 
 `('2020-02-02', '2020-03-07')`
 
@@ -116,7 +116,7 @@ Start and end for year to date most recent week completed (closed)
 fc5.year_to_date_completed()
 ```
 
-returns as a list 
+returns as a tuple 
 
 `('2020-02-02', '2020-02-29')`
 
