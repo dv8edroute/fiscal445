@@ -75,6 +75,7 @@ fc5.month_to_date()
 Returns as a list the start and end date for month to date reports
 
 `('2020-03-01', '2020-03-09')`
+
 <br>
 
 
@@ -85,11 +86,11 @@ Start and end for month to date most recent week completed or (closed)
 fc5.month_to_date_completed()
 ```
 
-Returns as a list the start and end date for month to date reports for up to the most completed week
+returns as a list the start and end date for month to date reports for up to the most completed week
 
 `('2020-03-01', '2020-03-08')`
 
-Returns the following if there has not been an entire complete fiscal week for that month. 
+returns the following if there has not been an entire complete fiscal week for that month. 
 
 `'Not available yet!'`
 
@@ -102,7 +103,7 @@ Start and end for year to date
 fc5.year_to_date()
 ```
 
-Returns as a list 
+returns as a list 
 
 `('2020-02-02', '2020-03-07')`
 
@@ -115,10 +116,11 @@ Start and end for year to date most recent week completed (closed)
 fc5.year_to_date_completed()
 ```
 
-Returns as a list 
+returns as a list 
 
 `('2020-02-02', '2020-02-29')`
 
+<br>
 
 To view the entire calendar after you have initialized it.
 
