@@ -3,7 +3,7 @@
 
 ## Description
 
-This script was developed to simplify the determination of reporting dates when using a 445 financial calendar. Many companies use the 445 calendar for financial reporting and it is difficult when setting up reports for YTD, MTD, by quater runs while only relying on a standard calendar. This module simplifies this by allowing you to set your own  start of the year date and weekending day.
+This script was developed to simplify the determination of reporting dates when using a 445 financial calendar. Many companies use the 445 calendar for financial reporting and it is difficult when setting up reports for YTD, MTD, by quarter runs while only relying on a standard calendar. This module simplifies this by allowing you to set your own  start of the year date and weekending day.
 
 ## Prerequisites
 Built and tested using
@@ -126,7 +126,7 @@ Start and end for completed quarters.
 
 1 for Q1, 2 for Q2, 3 for Q3, 4 for Q4
 
-arg is int value for quater above. `fc5.quarter_completed(arg)`
+arg is int value for quarter above. `fc5.quarter_completed(arg)`
 
 
 ```python
@@ -143,7 +143,7 @@ Start and end for quarter to date.
 
 1 for Q1, 2 for Q2, 3 for Q3, 4 for Q4
 
-arg is int value for quater above. `fc5.quarter_to_date(arg)`
+arg is int value for quarter above. `fc5.quarter_to_date(arg)`
 
 
 ```python
