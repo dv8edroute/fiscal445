@@ -20,19 +20,19 @@ Under development
 
 ## Usage
 
-#### Import the module
+### Import the module
 
 ```python
 import fiscal445 as fc5
 ```
 
-##### Set the modules parameters.
+#### Set the modules parameters.
 
 This will initialize the table using the date provided.
 
 Syntax: `fc5.cal = fc5.set_445_cal('YYYY-MM-DD','day')` where the date is the start of your fiscal 445 year and the day arg is the the last day of your fiscal week.
 
-##### Examples:
+#### Examples:
 
 ```python
 fc5.cal = fc5.set_445_cal('2020-02-02','sat')
