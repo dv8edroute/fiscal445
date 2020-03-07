@@ -14,7 +14,9 @@ numpy 1.18.0,
 datetime, 
 
 ## Deployment
-Back to dev for bug fix
+Deployed to PyPi.
+
+pip3 install fiscal445
 
 ## Usage
 import fiscal445 as fc5
