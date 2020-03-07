@@ -1,25 +1,3 @@
-
-# fiscal445
-
-## Description
-
-This script was developed to simplify the determination of reporting dates when using a 445 financial calendar. Many companies use the 445 calendar for financial reporting and it is difficult when setting up reports for YTD, MTD, by quater runs while only relying on a standard calendar. This module simplifies this by allowing you to set your own current start day and weekending.
-
-## Prerequisites
-Built and tested using
-
-python 3.6+, 
-pandas 0.25.3+, 
-numpy 1.18.0, 
-datetime, 
-
-## Deployment
-Under development
-
-
-
-## Usage
-
 #### Import the module
 
 ```python
@@ -65,7 +43,6 @@ fc5.cur_fiscal_month()
 ```
 ###### returns `'March'`
 
-<br>
 
 ###### Start and end for month to date
 
@@ -103,35 +80,21 @@ fc5.month_to_date_completed()
 fc5.year_to_date()
 ```
 
-###### Returns as a list 
+##### Returns as a list 
 
 ###### `('2020-02-02', '2020-03-07')`
 
-<br>
 
-###### Start and end for year to date most recent week completed (closed)
+
+##### Start and end for year to date most recent week completed (closed)
 
 
 ```python
 fc5.year_to_date_completed()
 ```
 
-###### Returns as a list 
+##### Returns as a list 
 
 ###### `('2020-02-02', '2020-02-29')`
-
-
-###### To view the entire calendar after you have initialized it.
-
-`print(fc5.cal)`
-
-
-## Authors
-Dv8edRoute - Original code
-
-## License
-MIT
-
-## Acknowledgments
 
 
