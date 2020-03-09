@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="fiscal445", 
-    version="1.0.3",
+    version="0.1.1",
     author="Dv8edRoute",
     author_email="dv8edroute@protonmail.com",
     license="MIT",
