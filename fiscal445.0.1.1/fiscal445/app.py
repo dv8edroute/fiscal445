@@ -9,6 +9,7 @@ import datetime
 import calendar
 from datetime import timedelta
 import sys
+import re
 
 
 current = np.datetime_as_string(np.datetime64('today','s'))[:10] # set the current date in numpy datetime
@@ -25,8 +26,25 @@ class Calendar(object):
         self.week_ending = week_ending
     
     def build(self):
-        '''Takes the arguments from fc5.cal = fc5.Calendar(['first day of your fiscal year'] and breaks them down in to smaller variables which create a dataframe 
+        '''Takes the arguments from fc5.cal = fc5.Calendar(['first day date of your fiscal year'], ['Last fiscal day of the week]) and breaks them 
+        down in to smaller variables which create a dataframe 
         with three columns. fiscal_month, fiscal_week, week_ending. It populates those columns dynamically based on the input it recieves. '''
+        
+        #Error checking input date and day format
+        
+        try:
+            start_pattern = re.compile(r"^[0-9]{4}-[0-9]{2}-[0-9]{2}$")
+            day_pattern = re.compile(r"^(MON|TUE|WED|THU|FRI|SAT|SUN)")
+            if not start_pattern.match(self.begin_year):
+                raise ValueError(' \n First day date of fiscal year malformed in fc5.cal = fc5.Calendar("YYYY-MM-DD","Day").build().\
+                     \n Accepted entries are: "YYYY-MM-DD"')
+            if not day_pattern.match(self.week_ending.upper()):
+                raise ValueError(' \n Last fiscal day of the week malformed in fc5.cal = fc5.Calendar("YYYY-MM-DD","Day").build().\
+                     \n Accepted entries are: "Mon,Tue,Wed,Thu,Fri,Sat,Sun"')
+        except ValueError as err:
+            print(err)
+            sys.exit()
+        
         lst = self.begin_year.split('-')
         year = lst[0]
         month = lst[1]
@@ -49,8 +67,8 @@ class Calendar(object):
                 count += 1
 
         # Create the list for the week_ending column using year_start and week_ending vars
-        cur_year = pd.Series(pd.date_range(year_start, periods=52, freq=f'W-{self.week_ending}'))
         
+        cur_year = pd.Series(pd.date_range(year_start, periods=52, freq=f'W-{self.week_ending}'))
 
         # Creates a list of months based on the input of first fiscal date of the year .
 
@@ -160,8 +178,7 @@ class Date_functions:
         if end < beginning:
             return 'Not available yet!'
         return str(beginning),str(end)
-
-
+    
 
     def year_to_date(self):
         '''Usage: fc5.cal.show.year_to_date() 
