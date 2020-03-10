@@ -23,7 +23,7 @@ fc5.cal.show.month_to_date()
 fc5.cal.show.month_to_date_completed()
 fc5.cal.show.year_to_date()
 fc5.cal.show.year_to_date_completed()
-fc5.cal.show.quarter_completed(args)
+fc5.cal.show.quarter_dates(args)
 fc5.cal.show.quarter_to_date(args)
  
  '''

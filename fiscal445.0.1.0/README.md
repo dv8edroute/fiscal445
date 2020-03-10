@@ -14,9 +14,9 @@ numpy 1.18.0,
 datetime, 
 
 ## Deployment
-Under development
+General release
 
-
+python -m pip install fiscal445
 
 ## Usage
 
