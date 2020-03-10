@@ -12,12 +12,13 @@ setuptools.setup(
     description="Returns 445 Fiscal calendar week and month ",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/dv8edroute/fiscal445/",
+    url="https://github.com/dv8edroute/fiscal445/tree/master/fiscal445.0.1.1",
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
+        "Topic :: Office/Business :: Financial :: Accounting",
     ],
     python_requires='>=3.6',
     install_requires=[
