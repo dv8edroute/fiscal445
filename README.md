@@ -14,7 +14,9 @@ numpy 1.18.0,
 datetime, 
 
 ## Deployment
-Under development
+Genderal deployment
+
+python -m pip install fiscal445
 
 
 ## Versions
