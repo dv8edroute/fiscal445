@@ -3,37 +3,6 @@
 # Version 0.1.1
 # License: MIT
 
-'''
-
-Modules main purpose is to dynamically create a 52 week calendar based on the financial ideal of a 4 week month, 4 week month and 5 week month per quarter.
-It achieves this by taking input from the parent script and initializing the calendar table.The syntax for this is
-
-import fiscal445 as fc5
-
-fc5.cal = fc5.Calendar(['first day of your fiscal year'],['3 letter last day of your fiscal week']).build() 
- 
-an example of this is...
-
-fc5.cal = fc5.Calendar('2020-02-02','sat').build()
-
-Once intialized the following meathods can  be run. See individual method docstrings for syntax or readme.md 
-
-NOTE: methods use a pandas api accessor ("show") 
-
-
-cal.show.cur_week_of_month()
-cal.show.cur_week_of_year()
-cal.show.cur_month()
-cal.show.month_to_date()
-cal.show.month_to_date_completed()
-cal.show.year_to_date()
-cal.show.year_to_date_completed()
-cal.show.quarter_completed(args)
-cal.show.quarter_to_date(args)
- 
- '''
-
-
 import pandas as pd
 import numpy as np
 import datetime
@@ -43,7 +12,7 @@ import sys
 
 
 current = np.datetime_as_string(np.datetime64('today','s'))[:10] # set the current date in numpy datetime
-cal = pd.DataFrame() # set empty dataframe
+#cal = pd.DataFrame() # set empty dataframe to be removed
 
 class Calendar(object):
     '''Calendar classes primary function is to dynamically create a dataframe table based on the inputted date and week ending
@@ -85,7 +54,7 @@ class Calendar(object):
 
         # Creates a list of months based on the input of first fiscal date of the year .
 
-        def get_month_list(mon_choice, day):
+        def _get_month_list(mon_choice, day):
             if int(day) >= 15:
                 mon_choice = mon_choice +1
             mlst = [1,2,3,4,5,6,7,8,9,10,11,12]
@@ -106,7 +75,7 @@ class Calendar(object):
             mon = [x for x, multipliers in zip(mon, multipliers) for _ in range(multipliers)]
             return mon
 
-        mon = get_month_list(desired_month, day)
+        mon = _get_month_list(desired_month, day)
 
 
         # Complite the three lists in to a list of lists
@@ -131,7 +100,7 @@ class Calendar(object):
 @pd.api.extensions.register_dataframe_accessor("show") # allows datframe objects to have additional methods added to them
 class Date_functions:
     
-    '''This class is aliased by the pandas accessor from "Date_functions" to "show" when calling it from the parent script.
+    '''This class is aliased by the pandas accessor decorator from "Date_functions" to "show" when calling it from the parent script.
     It contains all of the methods that will act on the cal dataframe and return results to the parent script.
     '''
     
@@ -281,14 +250,5 @@ class Date_functions:
         return str(beginning),str(end)
 
 
-def main():
-    if len(sys.argv)==2 and sys.argv[1]=='--help':
-        print(__doc__)
- 
-    help(Calendar)
-    help(Date_functions)
 
-
-if __name__ == '__main__':
-    main()
 
