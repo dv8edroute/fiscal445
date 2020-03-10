@@ -12,19 +12,20 @@ import sys
 import re
 
 
+
 current = np.datetime_as_string(np.datetime64('today','s'))[:10] # set the current date in numpy datetime
 #cal = pd.DataFrame() # set empty dataframe to be removed
 
 class Calendar(object):
     '''Calendar classes primary function is to dynamically create a dataframe table based on the inputted date and week ending
     arguments and return a completed dataframe'''
-    
+
     def __init__(self,begin_year,week_ending):
         '''Set the variables for the class'''
         
         self.begin_year = begin_year
         self.week_ending = week_ending
-    
+    #
     def build(self):
         '''Takes the arguments from fc5.cal = fc5.Calendar(['first day date of your fiscal year'], ['Last fiscal day of the week]) and breaks them 
         down in to smaller variables which create a dataframe 
@@ -126,18 +127,18 @@ class Date_functions:
         '''Set the variables for the class'''
         self._obj = pandas_obj
         
-        
+  
     def cur_week_of_month(self):
         '''Usage: fc5.cal.show.cur_week_of_month() 
             Returns an int representing which week of the month based on the 445 calendar it is currently'''
         return self._obj.loc[self._obj['week_ending'] >= current, 'fiscal_week'].head(1).item()       
-
+    
     def cur_week_of_year(self):
         '''Usage: fc5.cal.show.cur_week_of_year() 
             Returns an int representing which week of the year it is, based on the 445 calendar'''
         return self._obj.index[self._obj['week_ending'] >= current].tolist()[0]
 
-
+    
     def cur_month(self,var=None):
         '''Usage: fc5.cal.show.cur_month({optional var}) 
         
@@ -151,7 +152,7 @@ class Date_functions:
             return self._obj.loc[self._obj['week_ending'] >= current, 'fiscal_month'].head(1).item()
         else:
             return self._obj.loc[self._obj['week_ending'] >= current, 'fiscal_month'].head(1).item()[:var]
-            
+           
     def month_to_date(self):
         '''Usage: fc5.cal.show.month_to_date() 
             Returns a tuple representing the start of the current month and the current date it is, based on the 445 calendar'''
@@ -163,7 +164,7 @@ class Date_functions:
         end = current 
         return str(beginning),str(end)
 
-
+    
     def month_to_date_completed(self):
         '''Usage: fc5.cal.show.month_to_date_completed() 
             Returns a tuple representing the start of the current month and the last date of the last 
@@ -179,7 +180,7 @@ class Date_functions:
             return 'Not available yet!'
         return str(beginning),str(end)
     
-
+    
     def year_to_date(self):
         '''Usage: fc5.cal.show.year_to_date() 
             Returns a tuple representing the start of the current year and the current date based on the 445 calendar'''
@@ -187,7 +188,6 @@ class Date_functions:
         beginning = beginning.strftime("%Y-%m-%d")
         end = current 
         return str(beginning),str(end)
-
 
     def year_to_date_completed(self):
         '''Usage: fc5.cal.show.year_to_date_completed() 

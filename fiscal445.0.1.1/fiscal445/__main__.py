@@ -1,7 +1,8 @@
-from .app import * 
+import fiscal445 as fc5
+
 import sys
-
+print('Use: python fiscal445 --help for more')
 if len(sys.argv)==2 and sys.argv[1]=='--help':
-
-    help(Calendar)
-    help(Date_functions)
+    help(fc5)
+    help(fc5.Calendar)
+    help(fc5.Date_functions)
