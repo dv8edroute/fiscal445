@@ -138,17 +138,17 @@ class Date_functions:
     def __init__(self, pandas_obj):
         '''Set the variables for the class'''
         self._obj = pandas_obj
-        cal = self._obj
+        
         
     def cur_week_of_month(self):
         '''Usage: fc5.cal.show.cur_week_of_month() 
             Returns an int representing which week of the month based on the 445 calendar it is currently'''
-        return cal.loc[cal['week_ending'] >= current, 'fiscal_week'].head(1).item()       
+        return self._obj.loc[self._obj['week_ending'] >= current, 'fiscal_week'].head(1).item()       
 
     def cur_week_of_year(self):
         '''Usage: fc5.cal.show.cur_week_of_year() 
             Returns an int representing which week of the year it is, based on the 445 calendar'''
-        return cal.index[cal['week_ending'] >= current].tolist()[0]
+        return self._obj.index[self._obj['week_ending'] >= current].tolist()[0]
 
 
     def cur_month(self,var=None):
@@ -161,17 +161,17 @@ class Date_functions:
              Returns a sliced string, the length based on the optional int value, representing the 
              name of the month ('Mar') of the year it is, based on the 445 calendar'''
         if var == None:
-            return cal.loc[cal['week_ending'] >= current, 'fiscal_month'].head(1).item()
+            return self._obj.loc[self._obj['week_ending'] >= current, 'fiscal_month'].head(1).item()
         else:
-            return cal.loc[cal['week_ending'] >= current, 'fiscal_month'].head(1).item()[:var]
+            return self._obj.loc[self._obj['week_ending'] >= current, 'fiscal_month'].head(1).item()[:var]
             
     def month_to_date(self):
         '''Usage: fc5.cal.show.month_to_date() 
             Returns a tuple representing the start of the current month and the current date it is, based on the 445 calendar'''
-        idx = cal.index[cal['week_ending'] >= current].tolist()[0]
-        week_pos = cal.loc[cal['week_ending'] >= current, 'fiscal_week'].tolist()[0]
+        idx = self._obj.index[self._obj['week_ending'] >= current].tolist()[0]
+        week_pos = self._obj.loc[self._obj['week_ending'] >= current, 'fiscal_week'].tolist()[0]
         new_idx = idx - week_pos
-        beginning = cal.loc[new_idx, 'week_ending'] + timedelta(days=1)
+        beginning = self._obj.loc[new_idx, 'week_ending'] + timedelta(days=1)
         beginning = beginning.strftime("%Y-%m-%d")
         end = current 
         return str(beginning),str(end)
@@ -181,12 +181,12 @@ class Date_functions:
         '''Usage: fc5.cal.show.month_to_date_completed() 
             Returns a tuple representing the start of the current month and the last date of the last 
             completed week as set by week_ending and based on the 445 calendar'''
-        idx = cal.index[cal['week_ending'] > current].tolist()[0]
-        week_pos = cal.loc[cal['week_ending'] > current, 'fiscal_week'].tolist()[0]
+        idx = self._obj.index[self._obj['week_ending'] > current].tolist()[0]
+        week_pos = self._obj.loc[self._obj['week_ending'] > current, 'fiscal_week'].tolist()[0]
         new_idx = idx - week_pos
-        beginning = cal.loc[new_idx, 'week_ending'] + timedelta(days=1)
+        beginning = self._obj.loc[new_idx, 'week_ending'] + timedelta(days=1)
         beginning = beginning.strftime("%Y-%m-%d")
-        end = cal.loc[cal['week_ending'] < current, 'week_ending'].tolist()[-1]
+        end = self._obj.loc[self._obj['week_ending'] < current, 'week_ending'].tolist()[-1]
         end = end.strftime("%Y-%m-%d")
         if end < beginning:
             return 'Not available yet!'
@@ -197,7 +197,7 @@ class Date_functions:
     def year_to_date(self):
         '''Usage: fc5.cal.show.year_to_date() 
             Returns a tuple representing the start of the current year and the current date based on the 445 calendar'''
-        beginning = cal.loc[0,'week_ending']
+        beginning = self._obj.loc[0,'week_ending']
         beginning = beginning.strftime("%Y-%m-%d")
         end = current 
         return str(beginning),str(end)
@@ -207,9 +207,9 @@ class Date_functions:
         '''Usage: fc5.cal.show.year_to_date_completed() 
             Returns a tuple representing the start of the current year and the last date of the last 
             completed week as set by week_ending and based on the 445 calendar'''
-        beginning = cal.loc[0,'week_ending']
+        beginning = self._obj.loc[0,'week_ending']
         beginning = beginning.strftime("%Y-%m-%d")
-        end = cal.loc[cal['week_ending'] < current, 'week_ending'].tolist()[-1]
+        end = self._obj.loc[self._obj['week_ending'] < current, 'week_ending'].tolist()[-1]
         end = end.strftime("%Y-%m-%d")
         return str(beginning),str(end)
 
@@ -224,24 +224,24 @@ class Date_functions:
             Returns a tuple representing the start of the choosen quarter and the last day of the choosen quarter based on the 445 calendar'''
         self.val = val
         if self.val == 1:
-            beginning = cal.loc[0,'week_ending']
+            beginning = self._obj.loc[0,'week_ending']
             beginning = beginning.strftime("%Y-%m-%d")
-            end = cal.loc[13,'week_ending']
+            end = self._obj.loc[13,'week_ending']
             end = end.strftime("%Y-%m-%d")
         if self.val == 2:
-            beginning = cal.loc[13,'week_ending']  + timedelta(days=1)
+            beginning = self._obj.loc[13,'week_ending']  + timedelta(days=1)
             beginning = beginning.strftime("%Y-%m-%d")
-            end = cal.loc[26,'week_ending']
+            end = self._obj.loc[26,'week_ending']
             end = end.strftime("%Y-%m-%d")
         if self.val == 3:
-            beginning = cal.loc[26,'week_ending']  + timedelta(days=1)
+            beginning = self._obj.loc[26,'week_ending']  + timedelta(days=1)
             beginning = beginning.strftime("%Y-%m-%d")
-            end = cal.loc[39,'week_ending']
+            end = self._obj.loc[39,'week_ending']
             end = end.strftime("%Y-%m-%d")
         if self.val == 4:
-            beginning = cal.loc[39,'week_ending']  + timedelta(days=1)
+            beginning = self._obj.loc[39,'week_ending']  + timedelta(days=1)
             beginning = beginning.strftime("%Y-%m-%d")
-            end = cal.loc[52,'week_ending']
+            end = self._obj.loc[52,'week_ending']
             end = end.strftime("%Y-%m-%d")
         
         return str(beginning),str(end)
@@ -260,19 +260,19 @@ class Date_functions:
             Quarter available yet!'''
         self.val = val
         if self.val == 1:
-            beginning = cal.loc[0,'week_ending']
+            beginning = self._obj.loc[0,'week_ending']
             beginning = beginning.strftime("%Y-%m-%d")
             end = current 
         if self.val == 2:
-            beginning = cal.loc[13,'week_ending']  + timedelta(days=1)
+            beginning = self._obj.loc[13,'week_ending']  + timedelta(days=1)
             beginning = beginning.strftime("%Y-%m-%d")
             end = current 
         if self.val == 3:
-            beginning = cal.loc[26,'week_ending']  + timedelta(days=1)
+            beginning = self._obj.loc[26,'week_ending']  + timedelta(days=1)
             beginning = beginning.strftime("%Y-%m-%d")
             end = current 
         if self.val == 4:
-            beginning = cal.loc[39,'week_ending']  + timedelta(days=1)
+            beginning = self._obj.loc[39,'week_ending']  + timedelta(days=1)
             beginning = beginning.strftime("%Y-%m-%d")
             end = current 
         if np.datetime64(end) < np.datetime64(beginning):
@@ -281,11 +281,14 @@ class Date_functions:
         return str(beginning),str(end)
 
 
-
-if __name__ == '__main__':
+def main():
     if len(sys.argv)==2 and sys.argv[1]=='--help':
         print(__doc__)
-
+ 
     help(Calendar)
-    help(Date_functions )
+    help(Date_functions)
+
+
+if __name__ == '__main__':
+    main()
 
