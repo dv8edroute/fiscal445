@@ -15,7 +15,10 @@ datetime,
 sys,
 
 ## Deployment
-Under development
+General Deployment
+
+
+python -m pip install fiscal445
 
 
 
@@ -29,7 +32,7 @@ import fiscal445 as fc5
 
 #### Set the modules parameters.
 
-This will initialize the table using the date provided.
+To initialize the 445 calendar table
 
 Syntax: `fc5.cal = fc5.Calendar('YYYY-MM-DD','day').build()` where the date is the start of your fiscal 445 year and the day arg is the the last day of your fiscal week.
 
@@ -65,8 +68,8 @@ fc5.cal.show.cur_month({optional arg})
 ```
 returns `'March'` without optional arg
 
-With optional var example:  `fc5.cal.show.cur_month(3)`
-Returns a sliced string, where the length is based on the optional int value, representing the name of the month ('Mar') of the year it is, based on the 445 calendar'''
+With optional arg example:  `fc5.cal.show.cur_month(3)`
+Returns a sliced string, where the length is based on the optional int arg, representing the name of the month ('Mar') of the year it is, based on the 445 calendar'''
 
 <br>
 
@@ -76,7 +79,7 @@ Start and end for month to date
 ```python
 fc5.cal.show.month_to_date()
 ```
-Returns as a tuple the start and end date for month to date reports
+Returns a tuple of the start and end date for month to date reports
 
 `('2020-03-01', '2020-03-09')`
 
@@ -90,7 +93,7 @@ Start and end for month to date most recent week completed
 fc5.cal.show.month_to_date_completed()
 ```
 
-returns as a tuple the start and end date for month to date reports for up to the most completed week
+returns a tuple of the start and end date for month to date reports for up to the most completed week
 
 `('2020-03-01', '2020-03-08')`
 
@@ -107,7 +110,7 @@ Start and end for year to date
 fc5.cal.show.year_to_date()
 ```
 
-returns as a tuple 
+returns a tuple 
 
 `('2020-02-02', '2020-03-07')`
 
@@ -120,7 +123,7 @@ Start and end for year to date most recent week completed
 fc5.cal.show.year_to_date_completed
 ```
 
-returns as a tuple 
+returns a tuple 
 
 `('2020-02-02', '2020-02-29')`
 
@@ -130,14 +133,14 @@ Start and end dates for completed quarters.
 
 1 for Q1, 2 for Q2, 3 for Q3, 4 for Q4
 
-arg is int value for quarter above. `fc5.cal.show.quarter_dates(arg)`
+arg is int value for quarter indicated above. `fc5.cal.show.quarter_dates(arg)`
 
 
 ```python
 fc5.cal.show.quarter_dates(1)
 ```
 
-returns as a tuple 
+returns a tuple 
 
 `('2020-02-02', '2020-05-02')`
 
@@ -154,7 +157,7 @@ arg is int value for quarter above. `fc5.cal.show.quarter_to_date(arg)`
 fc5.cal.show.quarter_to_date(1)
 ```
 
-returns as a tuple 
+returns a tuple 
 
 `('2020-02-02', '2020-03-07')`
 

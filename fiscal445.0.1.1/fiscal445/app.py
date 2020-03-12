@@ -14,10 +14,10 @@ import re
 
 
 current = np.datetime_as_string(np.datetime64('today','s'))[:10] # set the current date in numpy datetime
-#cal = pd.DataFrame() # set empty dataframe to be removed
+
 
 class Calendar(object):
-    '''Calendar classes primary function is to dynamically create a dataframe table based on the inputted date and week ending
+    '''Calendar classes primary function is to dynamically create a dataframe table based on the input date and week ending
     arguments and return a completed dataframe'''
 
     def __init__(self,begin_year,week_ending):
@@ -28,8 +28,8 @@ class Calendar(object):
     #
     def build(self):
         '''Takes the arguments from fc5.cal = fc5.Calendar(['first day date of your fiscal year'], ['Last fiscal day of the week]) and breaks them 
-        down in to smaller variables which create a dataframe 
-        with three columns. fiscal_month, fiscal_week, week_ending. It populates those columns dynamically based on the input it recieves. '''
+        down in to smaller variables which create a dataframe with three columns. fiscal_month, fiscal_week, week_ending. 
+        It populates those columns dynamically based on the input it recieves. '''
         
         #Error checking input date and day format
         
@@ -54,7 +54,7 @@ class Calendar(object):
         desired_month = int(month)
         year_start = f'{year}-{month}-{day}'
         
-        # This section creates a list with 52 entries with the 4-4-5 pattern for the fiscal week column
+        # Creates a list with 52 entries with the 4-4-5 pattern for the fiscal week column
         weeks = []
         four = [1,2,3,4]
         five = [1,2,3,4,5]
@@ -130,12 +130,12 @@ class Date_functions:
   
     def cur_week_of_month(self):
         '''Usage: fc5.cal.show.cur_week_of_month() 
-            Returns an int representing which week of the month based on the 445 calendar it is currently'''
+            Returns an int representing which week of the month based on the 445 calendar and the current date'''
         return self._obj.loc[self._obj['week_ending'] >= current, 'fiscal_week'].head(1).item()       
     
     def cur_week_of_year(self):
         '''Usage: fc5.cal.show.cur_week_of_year() 
-            Returns an int representing which week of the year it is, based on the 445 calendar'''
+            Returns an int representing which week of the year it is, based on the 445 calendar and the current date'''
         return self._obj.index[self._obj['week_ending'] >= current].tolist()[0]
 
     
@@ -143,11 +143,11 @@ class Date_functions:
         '''Usage: fc5.cal.show.cur_month({optional var}) 
         
         Example: fc5.cal.show.cur_month() 
-            Returns a string representing the name of the month ('March') of the year it is, based on the 445 calendar
+            Returns a string representing the name of the month ('March') of the year it is, based on the 445 calendar and the current date
             
         With optional var example:  fc5.cal.show.cur_month(3)
              Returns a sliced string, the length based on the optional int value, representing the 
-             name of the month ('Mar') of the year it is, based on the 445 calendar'''
+             name of the month ('Mar') of the year it is, based on the 445 calendar and the current date'''
         if var == None:
             return self._obj.loc[self._obj['week_ending'] >= current, 'fiscal_month'].head(1).item()
         else:
@@ -155,7 +155,7 @@ class Date_functions:
            
     def month_to_date(self):
         '''Usage: fc5.cal.show.month_to_date() 
-            Returns a tuple representing the start of the current month and the current date it is, based on the 445 calendar'''
+            Returns a tuple representing the start of the current month and the current date, based on the 445 calendar'''
         idx = self._obj.index[self._obj['week_ending'] >= current].tolist()[0]
         week_pos = self._obj.loc[self._obj['week_ending'] >= current, 'fiscal_week'].tolist()[0]
         new_idx = idx - week_pos
@@ -168,7 +168,7 @@ class Date_functions:
     def month_to_date_completed(self):
         '''Usage: fc5.cal.show.month_to_date_completed() 
             Returns a tuple representing the start of the current month and the last date of the last 
-            completed week as set by week_ending and based on the 445 calendar'''
+            completed week as set by week_ending and based on the 445 calendar and the current date'''
         idx = self._obj.index[self._obj['week_ending'] > current].tolist()[0]
         week_pos = self._obj.loc[self._obj['week_ending'] > current, 'fiscal_week'].tolist()[0]
         new_idx = idx - week_pos
@@ -183,7 +183,7 @@ class Date_functions:
     
     def year_to_date(self):
         '''Usage: fc5.cal.show.year_to_date() 
-            Returns a tuple representing the start of the current year and the current date based on the 445 calendar'''
+            Returns a tuple representing the start of the current year and the current date based on the 445 calendar and the current date'''
         beginning = self._obj.loc[0,'week_ending']
         beginning = beginning.strftime("%Y-%m-%d")
         end = current 
@@ -192,7 +192,7 @@ class Date_functions:
     def year_to_date_completed(self):
         '''Usage: fc5.cal.show.year_to_date_completed() 
             Returns a tuple representing the start of the current year and the last date of the last 
-            completed week as set by week_ending and based on the 445 calendar'''
+            completed week as set by week_ending and based on the 445 calendar and the current date'''
         beginning = self._obj.loc[0,'week_ending']
         beginning = beginning.strftime("%Y-%m-%d")
         end = self._obj.loc[self._obj['week_ending'] < current, 'week_ending'].tolist()[-1]

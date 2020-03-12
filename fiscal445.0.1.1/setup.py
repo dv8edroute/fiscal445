@@ -9,7 +9,7 @@ setuptools.setup(
     author="Dv8edRoute",
     author_email="dv8edroute@protonmail.com",
     license="MIT",
-    description="Returns 445 Fiscal calendar week and month ",
+    description="445 Fiscal calendar ",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/dv8edroute/fiscal445/tree/master/fiscal445.0.1.1",

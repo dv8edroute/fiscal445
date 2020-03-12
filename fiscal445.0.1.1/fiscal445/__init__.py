@@ -13,7 +13,7 @@ fc5.cal = fc5.Calendar('2020-02-02','sat').build()
 
 Once intialized the following meathods can  be run. See individual method docstrings for syntax or readme.md 
 
-NOTE: methods use a pandas api accessor ("show") 
+NOTE: methods use a pandas api accessor decorator("show") instead of class name Date_functions
 
 
 fc5.cal.show.cur_week_of_month()
