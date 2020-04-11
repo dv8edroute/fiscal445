@@ -1,0 +1,5 @@
+Change log:
+
+0.1.2
+# changed item() to values.item() to comply with FutureWarning
+# add sort=Fase to dataframe appends to comply with FutureWarning
