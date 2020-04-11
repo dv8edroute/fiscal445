@@ -104,13 +104,13 @@ class Calendar(object):
         x = np.datetime64(year_start,'s')
         yr_start = np.datetime64(np.datetime_as_string(x)[:10])
 
-        #Creates finished dataframe by appending the start ddte to index 0 and adding new rows form from list of lists and returns a dataframe
+        #Creates finished dataframe by appending the start date to index 0 and adding new rows form from list of lists and returns a dataframe
         self.df = pd.DataFrame()
-        self.df = self.df.append({"week_ending" : yr_start , "fiscal_week" : 'Start',"fiscal_month": 'Start' } , ignore_index=True)
+        self.df = self.df.append({"week_ending" : yr_start , "fiscal_week" : 'Start',"fiscal_month": 'Start' } , ignore_index=True, sort=False)
         for x in range(0,52):
             line_item = [item[x] for item in newlist]
             temp =pd.DataFrame([line_item],columns=["week_ending", "fiscal_week", "fiscal_month"])
-            self.df = self.df.append(temp, ignore_index=True)
+            self.df = self.df.append(temp, ignore_index=True, sort=False)
 
         return self.df
 
