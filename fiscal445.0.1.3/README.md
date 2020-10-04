@@ -42,6 +42,7 @@ Syntax: `fc5.cal = fc5.Calendar('YYYY-MM-DD','day').build()` where the date is t
 fc5.cal = fc5.Calendar('2020-02-02','sat').build()
 ```
 
+<br>
 
 Week of the month it is based on 445 fiscal calendar
 
@@ -51,6 +52,7 @@ fc5.cal.show.cur_week_of_month()
 returns `1` based on example date
 
 <br>
+
 ```python
 fc5.cal.show.prior_week_of_month()
 ```
@@ -66,6 +68,7 @@ fc5.cal.show.cur_week_of_year()
 returns `5` 
 
 <br>
+
 Which month of the year it is based on 445 calendar
 
 
@@ -78,6 +81,7 @@ With optional arg example:  `fc5.cal.show.cur_month(3)`
 Returns a sliced string, where the length is based on the optional int arg, representing the name of the month ('Mar') of the year it is, based on the 445 calendar'''
 
 <br>
+
 Which month of the year it is based on 445 calendar minus one week
 
 
