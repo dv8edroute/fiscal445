@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "fiscal445"
+version = "1.0.0"
+description = "445 Fiscal calendar"
+readme = "README.md"
+requires-python = ">=3.8"
+license = { text = "MIT" }
+
+authors = [
+  { name = "Dv8edRoute", email = "dv8edroute@protonmail.com" }
+]
+
+keywords = ["fiscal", "calendar", "445", "finance", "reporting"]
+
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Topic :: Office/Business :: Financial :: Accounting"
+]
+
+dependencies = [
+  "pandas>=2.0,<3.0",
+  "numpy>=1.23"
+]
+
+[project.urls]
+Homepage = "https://github.com/dv8edroute/fiscal445"
+# If you have different URLs for docs, issues, etc, you can add:
+# Documentation = "..."
+# Source = "..."
+# Tracker = "..."
+
+[tool.setuptools]
+# You’re using a simple layout: package dir == project root
+package-dir = {"" = "."}
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["fiscal445*"]
