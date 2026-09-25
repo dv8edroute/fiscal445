@@ -27,7 +27,7 @@ python -m pip install fiscal445
 [Version 0.1.4](fiscal445.0.1.4) <br>
 [Version 0.1.5](fiscal445.0.1.5) <br>
 [Version 0.1.6](fiscal445.0.1.6) <br>
-
+[Version 0.1.6](fiscal445.1.0.0) <br>
 
 
 
