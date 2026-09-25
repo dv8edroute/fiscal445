@@ -1,3 +1,14 @@
+# Build artifacts (any version folder)
+dist/
+build/
+*.egg-info/
+__pycache__/
+*.pyc
+
+# Virtual environments
+test_env/
+venv/
+.venv/
 
 fiscal445.0.1.4/fiscal445.egg-info/top_level.txt
 fiscal445.0.1.4/fiscal445.egg-info/SOURCES.txt
