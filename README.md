@@ -7,7 +7,7 @@ This script was developed to simplify the determination of reporting dates when 
 
 ## Prerequisites
 
-Requirements differ by version — see the version list below and check that version's own README for exact details. As of 1.0.0:
+Requirements differ by version — see the version list below and check that version's own README for exact details. As of 1.1.0:
 
 python 3.8+,
 pandas 2.0+ (2.x and 3.x both supported),
