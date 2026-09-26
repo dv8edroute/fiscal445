@@ -28,4 +28,4 @@ Basic usage:
 from .app import Calendar, Date_functions  # noqa: F401
 
 __all__ = ["Calendar", "Date_functions"]
-__version__ = "1.0.1"
+__version__ = "1.1.0"

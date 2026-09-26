@@ -1,13 +1,13 @@
 
 # Author: Dv8edRoute
 # Email: dv8edroute@protonmail.com
-# Version 1.0.1
+# Version 1.1.0
 # License: MIT
 
 """
-fiscal445 1.0.1 — 4-4-5 Retail Fiscal Calendar
+fiscal445 1.1.0 — 4-4-5 Retail Fiscal Calendar
 ────────────────────────────────────────────────────────────────────
-                         WHAT'S NEW IN 1.0.1
+                         WHAT'S NEW IN 1.1.0
 ────────────────────────────────────────────────────────────────────
 100 % BACKWARDS COMPATIBLE — all 1.0.0 code runs unchanged
 
