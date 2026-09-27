@@ -7,7 +7,7 @@ This script was developed to simplify the determination of reporting dates when 
 
 ## Prerequisites
 
-Requirements differ by version — see the version list below and check that version's own README for exact details. As of 1.1.0:
+Requirements differ by version — see the version list below and check that version's own README for exact details. As of 1.1.1:
 
 python 3.8+,
 pandas 2.0+ (2.x and 3.x both supported),
@@ -20,11 +20,11 @@ General deployment
 
 python -m pip install fiscal445
 
-This installs the latest version from PyPI (currently 1.1.0).
+This installs the latest version from PyPI (currently 1.1.1).
 
 ## Versions
 
-[Version 1.1.0](fiscal445.1.1.0) — current, recommended <br>
+[Version 1.1.1](fiscal445.1.1.1) — current, recommended <br>
 [Version 1.0.0](fiscal445.1.0.0) <br>
 [Version 0.1.6](fiscal445.0.1.6) <br>
 [Version 0.1.5](fiscal445.0.1.5) <br>

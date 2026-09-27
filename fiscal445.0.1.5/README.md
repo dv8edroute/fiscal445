@@ -78,7 +78,7 @@ fc5.cal.show.cur_month({optional arg})
 returns `'March'` without optional arg
 
 With optional arg example:  `fc5.cal.show.cur_month(3)`
-Returns a sliced string, where the length is based on the optional int arg, representing the name of the month ('Mar') of the year it is, based on the 445 calendar'''
+Returns a sliced string, where the length is based on the optional int arg, representing the name of the month ('Mar') of the year it is, based on the 445 calendar
 
 <br>
 
@@ -91,7 +91,7 @@ fc5.cal.show.month_of_prior_week({optional arg})
 returns `'March'` without optional arg
 
 With optional arg example:  `fc5.cal.show.month_of_prior_week(3)`
-Returns a sliced string, where the length is based on the optional int arg, representing the name of the month ('Mar') of the year it is, based on the 445 calendar minus one week'''
+Returns a sliced string, where the length is based on the optional int arg, representing the name of the month ('Mar') of the year it is, based on the 445 calendar minus one week
 
 <br>
 
@@ -142,7 +142,7 @@ Start and end for year to date most recent week completed
 
 
 ```python
-fc5.cal.show.year_to_date_completed
+fc5.cal.show.year_to_date_completed()
 ```
 
 returns a tuple 
@@ -185,7 +185,7 @@ returns a tuple
 
 returns the following if the current date is before the requested quarter 
 
-`'Quarter not available!'`
+`'Quarter not available yet!'`
 
 <br>
 

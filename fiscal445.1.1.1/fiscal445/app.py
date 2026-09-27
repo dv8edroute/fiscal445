@@ -1,13 +1,13 @@
 
 # Author: Dv8edRoute
 # Email: dv8edroute@protonmail.com
-# Version 1.1.0
+# Version 1.1.1
 # License: MIT
 
 """
-fiscal445 1.1.0 — 4-4-5 Retail Fiscal Calendar
+fiscal445 1.1.1 — 4-4-5 Retail Fiscal Calendar
 ────────────────────────────────────────────────────────────────────
-                         WHAT'S NEW IN 1.1.0
+                         WHAT'S NEW IN 1.1.1
 ────────────────────────────────────────────────────────────────────
 100 % BACKWARDS COMPATIBLE — all 1.0.0 code runs unchanged
 
@@ -134,19 +134,14 @@ class Calendar(object):
 
         def _get_month_list(mon_choice, day):
             if int(day) >= 15:
-                mon_choice = mon_choice +1
-            mlst = [1,2,3,4,5,6,7,8,9,10,11,12,1]
-            if mon_choice == 1:
-                mon_choice = mlst
-            else:
-                mon_choice = mon_choice -1
-                lst = mlst[mlst.index(mon_choice)+1:]
-                lst.extend(mlst[:mon_choice])
-                mon_choice = lst
-
+                mon_choice = (mon_choice % 12) + 1
+            base = [1,2,3,4,5,6,7,8,9,10,11,12]
+            start_idx = mon_choice - 1
+            rotated = base[start_idx:] + base[:start_idx]
+            rotated.append(rotated[0])
 
             mon = []
-            for i in mon_choice:
+            for i in rotated:
                 y = calendar.month_name[i]
                 mon.append(y)
             multipliers = [4,4,5,4,4,5,4,4,5,4,4,5,4]
@@ -186,58 +181,18 @@ class Calendar(object):
         # skipped entirely, and self.df is returned exactly as it always
         # was — this is what makes the change backward compatible.
         if self.capture_outliers:
-
-            # 'year' already exists at this point in build() — it was
-            # split out of self.begin_year near the top of the method
-            # (the line "year = lst[0]") to build the fiscal-month list.
-            # We're reusing that same variable, not creating a new one.
-            #
-            # pd.Timestamp, not Python's built-in datetime.date: pandas 3
-            # is strict about this. The 'week_ending' column is stored as
-            # a pandas datetime64 column, and pandas 3 refuses to accept
-            # a plain datetime.date value into that column — it raises a
-            # TypeError. pd.Timestamp is pandas's own datetime type, so
-            # it matches the column's dtype and pandas accepts it.
-            true_start = pd.Timestamp(int(year), 1, 1)   # Jan 1 of the fiscal year
-            true_end   = pd.Timestamp(int(year), 12, 31) # Dec 31 of the fiscal year
+            fiscal_year = int(year) + 1 if int(month) == 12 else int(year)
+            true_start = pd.Timestamp(fiscal_year, 1, 1)
+            true_end   = pd.Timestamp(fiscal_year, 12, 31)
 
             # --- FRONT of the year ---
-            # Row 0 is always the 'Start' placeholder row (see the
-            # rows.append({...'fiscal_week': 'Start'...}) block earlier
-            # in build()). Its week_ending currently equals begin_year
-            # itself — e.g. 2026-01-03 — which is WHY days before that
-            # (Jan 1-2) were invisible to the calendar: nothing in the
-            # table represented them.
-            #
-            # We fix that by moving row 0's date back to true Jan 1, and
-            # copying week 1's own label onto it. Two effects:
-            #  1. Any query for Jan 1 or Jan 2 now finds a row whose date
-            #     is >= that query date, and that row correctly reports
-            #     week 1 / the first fiscal month, instead of matching
-            #     the old 'Start' row and returning the placeholder text
-            #     'Start'.
-            #  2. year_to_date() and month_to_date() both read row 0's
-            #     week_ending directly as their "beginning" date. Since
-            #     we changed that cell to Jan 1, those methods now report
-            #     the correct start automatically — we don't have to
-            #     touch those methods at all.
-            self.df.loc[0, 'week_ending']  = true_start
-            self.df.loc[0, 'fiscal_week']  = self.df.loc[1, 'fiscal_week']
-            self.df.loc[0, 'fiscal_month'] = self.df.loc[1, 'fiscal_month']
+            if true_start < self.df.loc[0, 'week_ending']:
+                self.df.loc[0, 'week_ending']  = true_start
+                self.df.loc[0, 'fiscal_week']  = self.df.loc[1, 'fiscal_week']
+                self.df.loc[0, 'fiscal_month'] = self.df.loc[1, 'fiscal_month']
 
-            # --- BACK of the year ---
-            # Row 52 is week 52, the last "normal" week before the extra
-            # leap-week row (row 53) that exists for years needing a 53rd
-            # week. Depending on how begin_year lines up with week_ending,
-            # week 52 sometimes ends a few days short of Dec 31 (e.g.
-            # Dec 29), leaving Dec 30-31 outside any week — the same kind
-            # of gap as the front, just at the other end of the year.
-            #
-            # We only stretch row 52 forward if it's actually short.
-            # Some years week 52 already reaches or passes Dec 31 on its
-            # own (that happened in our 2026 test) — in that case this
-            # condition is False and we correctly leave it untouched.
-            if self.df.loc[52, 'week_ending'] < true_end:
+            
+            if self.df.loc[52, 'week_ending'] != true_end:
                 self.df.loc[52, 'week_ending'] = true_end
 
         return self.df
@@ -254,21 +209,42 @@ class Date_functions:
     def __init__(self, pandas_obj):
         '''Set the variables for the class'''
         self._obj = pandas_obj
+
+    def _check_current_in_range(self):
+        '''Raises a clear error if `current` (today's real date, or
+        whatever date fiscal445 is reading) falls outside the span this
+        calendar actually covers. fiscal445 is designed for real-time use
+        only -- methods that depend on "today" don't make sense for a
+        calendar representing a different year.'''
+        start = self._obj.loc[0, 'week_ending']
+        end = self._obj.loc[52, 'week_ending']
+        now = pd.Timestamp(current)
+        if not (start <= now <= end):
+            raise RuntimeError(
+                f"fiscal445: the current date ({current}) falls outside the "
+                f"range of this calendar ({start.strftime('%Y-%m-%d')} to "
+                f"{end.strftime('%Y-%m-%d')}). Methods that depend on the "
+                f"current date only work for the fiscal year this calendar "
+                f"represents."
+            )
         
   
     def cur_week_of_month(self):
         '''Usage: fc5.cal.show.cur_week_of_month() 
             Returns an int representing which week of the month based on the 445 calendar and the current date'''
+        self._check_current_in_range()
         return self._obj.loc[self._obj['week_ending'] >= current, 'fiscal_week'].head(1).values.item()
     
     def prior_week_of_month(self):
         '''Usage: fc5.cal.show.prior_week_of_month() 
             Returns an int representing which prior week of the month it is based on the 445 calendar and the current date'''
+        self._check_current_in_range()
         return self._obj.loc[self._obj['week_ending'] < current, 'fiscal_week'].tail(1).values.item()
     
     def cur_week_of_year(self):
         '''Usage: fc5.cal.show.cur_week_of_year() 
             Returns an int representing which week of the year it is, based on the 445 calendar and the current date'''
+        self._check_current_in_range()
         return self._obj.index[self._obj['week_ending'] >= current].tolist()[0]
 
     
@@ -281,6 +257,7 @@ class Date_functions:
         With optional var example:  fc5.cal.show.cur_month(3)
              Returns a sliced string, the length based on the optional int value, representing the 
              name of the month ('Mar') of the year it is, based on the 445 calendar and the current date'''
+        self._check_current_in_range()
         if var == None:
             return self._obj.loc[self._obj['week_ending'] >= current, 'fiscal_month'].head(1).values.item()
         else:
@@ -296,6 +273,7 @@ class Date_functions:
         With optional var example:  fc5.cal.show.month_of_prior_week(3)
              Returns a sliced string, the length based on the optional int value, representing the 
              name of the month ('Mar') of the year it is, based on the 445 calendar and the current date minus one week'''
+        self._check_current_in_range()
         if var == None:
             return self._obj.loc[self._obj['week_ending'] < current, 'fiscal_month'].tail(1).values.item()
         else:
@@ -304,6 +282,7 @@ class Date_functions:
     def month_to_date(self):
         '''Usage: fc5.cal.show.month_to_date() 
             Returns a tuple representing the start of the current month and the current date, based on the 445 calendar'''
+        self._check_current_in_range()
         idx = self._obj.index[self._obj['week_ending'] >= current].tolist()[0]
         week_pos = self._obj.loc[self._obj['week_ending'] >= current, 'fiscal_week'].tolist()[0]
         new_idx = idx - week_pos
@@ -323,10 +302,14 @@ class Date_functions:
         '''Usage: fc5.cal.show.month_to_date_completed() 
             Returns a tuple representing the start of the current month and the last date of the last 
             completed week as set by week_ending and based on the 445 calendar and the current date'''
+        self._check_current_in_range()
         idx = self._obj.index[self._obj['week_ending'] > current].tolist()[0]
         week_pos = self._obj.loc[self._obj['week_ending'] > current, 'fiscal_week'].tolist()[0]
         new_idx = idx - week_pos
-        beginning = self._obj.loc[new_idx, 'week_ending'] + timedelta(days=1)
+        if new_idx == 0:
+            beginning = self._obj.loc[0, 'week_ending']
+        else:
+            beginning = self._obj.loc[new_idx, 'week_ending'] + timedelta(days=1)
         beginning = beginning.strftime("%Y-%m-%d")
         end = self._obj.loc[self._obj['week_ending'] < current, 'week_ending'].tolist()[-1]
         end = end.strftime("%Y-%m-%d")
@@ -338,6 +321,7 @@ class Date_functions:
     def year_to_date(self):
         '''Usage: fc5.cal.show.year_to_date() 
             Returns a tuple representing the start of the current year and the current date based on the 445 calendar and the current date'''
+        self._check_current_in_range()
         beginning = self._obj.loc[0,'week_ending']
         beginning = beginning.strftime("%Y-%m-%d")
         end = current 
@@ -347,6 +331,7 @@ class Date_functions:
         '''Usage: fc5.cal.show.year_to_date_completed() 
             Returns a tuple representing the start of the current year and the last date of the last 
             completed week as set by week_ending and based on the 445 calendar and the current date'''
+        self._check_current_in_range()
         beginning = self._obj.loc[0,'week_ending']
         beginning = beginning.strftime("%Y-%m-%d")
         end = self._obj.loc[self._obj['week_ending'] < current, 'week_ending'].tolist()[-1]
@@ -398,6 +383,7 @@ class Date_functions:
             should you choose a quarter the is in the future of the current date the function will return
        
             Quarter available yet!'''
+        self._check_current_in_range()
         self.val = val
         if self.val == 1:
             beginning = self._obj.loc[0,'week_ending']
